@@ -1,0 +1,59 @@
+---
+import ProjectRail from "../components/ProjectRail.astro";
+import NewsTicker from "../components/NewsTicker.astro";
+import { siteContent } from "../data/siteContent";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={siteContent.bio} />
+		<title>{siteContent.name} | Selected Work & Notes</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="page-shell">
+			<main id="top">
+				<section class="introduction" aria-labelledby="page-title">
+					<h1 id="page-title">{siteContent.name}</h1>
+				</section>
+
+				<section class="work-section" id="work" aria-labelledby="work-heading">
+					<div class="section-heading">
+						<h2 id="work-heading">Selected projects</h2>
+						<div class="project-controls" aria-label="Project navigation">
+							<button type="button" data-project-scroll="-1" aria-label="Previous projects">←</button>
+							<button type="button" data-project-scroll="1" aria-label="Next projects">→</button>
+						</div>
+					</div>
+					<ProjectRail projects={siteContent.projects} />
+				</section>
+
+				<section class="about-section" id="about" aria-labelledby="about-heading">
+					<p class="eyebrow">A little about me</p>
+					<div class="about-content">
+						<h2 id="about-heading">Hello, I’m Joe.</h2>
+						<div>
+							<p>{siteContent.bio}</p>
+							<a class="cv-link" href={siteContent.cvHref} target="_blank" rel="noreferrer">
+								{siteContent.cvLabel}<span aria-hidden="true"> ↗</span>
+							</a>
+						</div>
+					</div>
+				</section>
+			</main>
+		</div>
+
+		<NewsTicker items={siteContent.newsItems} />
+	</body>
+</html>
